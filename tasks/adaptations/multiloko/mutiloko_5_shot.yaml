@@ -1,0 +1,24 @@
+task: itabench_multiloko_5_shot
+
+dataset_path: Deer-Lu/Multiloko_eval
+dataset_name: Italian  # Specifying to use the Italian split
+
+validation_split: Italian
+
+doc_to_text:"{% for x in few_shot -%} Rispondi alla seguente domanda in modo chiaro e conciso. D: {{ x['question'] }} Produci solo risposte del seguente tipo: {{ output_type }}. R: {{ x['answer'] }} {% endfor -%} D: {{ question }} Produci solo risposte del seguente tipo: {{ output_type }}. R:"
+
+fewshot_examples = {"italian": [
+        {"question": "Quando si festeggia Ferragosto?", "answer": "15 agosto", "output_type": "data"},
+        {"question": "Quando ha vinto l'Italia per l'ultima volta i mondiali di calcio?", "answer": "2006", "output_type": "data"},
+        {"question": "Quale moneta aveva l'Italia prima dell'euro?", "answer": "Lira", "output_type": "nome"},
+        {"question": "Come si chiama il primo Presidente della Repubblica italiana?", "answer": "Enrico De Nicola", "output_type": "nome"},
+        {"question": "Quando è la Festa della Repubblica in Italia?", "answer": "2 giugno", "output_type": "data"},
+        ]
+    }
+
+doc_to_target: targets
+
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true

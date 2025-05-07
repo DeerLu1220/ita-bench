@@ -1,0 +1,15 @@
+task: itabench_multiloko_0_shot
+
+dataset_path: Deer-Lu/Multiloko_eval
+dataset_name: Italian  # Specifying to use the Italian split
+
+validation_split: Italian
+
+doc_to_text:"Rispondi alla seguente domanda in modo chiaro e conciso: '{{ question }}'\n Produci solo risposte del seguente tipo: {{ output_type }}"
+
+doc_to_target: targets
+
+metric_list:
+  - metric: acc
+    aggregation: mean
+    higher_is_better: true
